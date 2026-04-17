@@ -1,0 +1,10 @@
+#!/usr/bin/make -f
+export DEB_BUILD_MAINT_OPTIONS = hardening=-format
+%:
+	dh $@
+
+override_dh_auto_build:
+	$(MAKE) DEBUG=no
+
+override_dh_auto_install:
+	install -D -m 755 jbdtool debian/jbdtool/usr/bin/jbdtool

@@ -1,0 +1,14 @@
+Source: jbdtool
+Section: utils
+Priority: optional
+Maintainer: Daniel Di Marco <daniel.dimarco@farming-revolution.com>
+Build-Depends: debhelper-compat (= 13), gcc, make
+Standards-Version: 4.6.0
+
+Package: jbdtool
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: CLI tool for JBD Battery Management Systems
+ jbdtool communicates with JBD BMS devices over serial, CAN, Bluetooth,
+ and TCP/IP transports. Supports reading/writing battery parameters and
+ JSON output.
