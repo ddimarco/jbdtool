@@ -1,6 +1,12 @@
 
 JBD BMS linux-based utility
 
+build with `make`, then run:
+``` 
+./jbdtool -t serial:/dev/ttyS7 -r -a
+```
+
+
 MQTT support requires the phao.mqtt.c library https://github.com/eclipse/paho.mqtt.c
 
 build & install the library then edit the Makefile and set MQTT=yes
