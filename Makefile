@@ -1,7 +1,7 @@
 
 DEBUG=yes
-BLUETOOTH=yes
-MQTT=yes
+BLUETOOTH=no
+MQTT=no
 STATIC=no
 
 ifeq ($(TARGET),win32)
