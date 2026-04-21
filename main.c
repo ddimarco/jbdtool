@@ -672,6 +672,26 @@ int write_parm(void *h, struct jbd_params *pp, char *value) {
 		len = strlen(value);
 		memcpy(data,value,len);
 		break;
+	case JBD_PARM_DT_SCVAL: {
+		int vals[] = { 22,33,44,56,67,78,89,100 };
+		int v = atoi(value);
+		int idx = -1;
+		for (int i = 0; i < 8; i++) { if (vals[i] == v) { idx = i; break; } }
+		if (idx < 0) { printf("error: invalid SCValue %s (valid: 22,33,44,56,67,78,89,100)\n", value); return -1; }
+		if (jbd_rw(h, JBD_CMD_READ, pp->reg, data, sizeof(data)) < 1) return -1;
+		data[0] = (data[0] & ~0x07) | idx;
+		break;
+	}
+	case JBD_PARM_DT_SCDELAY: {
+		int vals[] = { 70,100,200,400 };
+		int v = atoi(value);
+		int idx = -1;
+		for (int i = 0; i < 4; i++) { if (vals[i] == v) { idx = i; break; } }
+		if (idx < 0) { printf("error: invalid SCDelay %s (valid: 70,100,200,400)\n", value); return -1; }
+		if (jbd_rw(h, JBD_CMD_READ, pp->reg, data, sizeof(data)) < 1) return -1;
+		data[0] = (data[0] & ~0x18) | (idx << 3);
+		break;
+	}
 	}
 //	bindump("write data",data,len);
 	return jbd_rw(h, JBD_CMD_WRITE, pp->reg, data, len);
